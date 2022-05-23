@@ -192,6 +192,8 @@ function Home() {
     const [index1, setIndex1] = useState(0);
     const [index2, setIndex2] = useState(0);
     const [leaving, setLeaving] = useState(false);
+    const [leaving1, setLeaving1] = useState(false);
+    const [leaving2, setLeaving2] = useState(false);
     const increaseIndex = () => {
         if (data) {
             if (leaving) return;
@@ -203,8 +205,8 @@ function Home() {
     };
     const increaseIndex1 = () => {
         if (topData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving1) return;
+            toggleLeaving1();
             const totalMovies = topData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex1((prev) => (prev === maxIndex ? 0 : prev + 1));
@@ -212,8 +214,8 @@ function Home() {
     };
     const increaseIndex2 = () => {
         if (upcomingData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving2) return;
+            toggleLeaving2();
             const totalMovies = upcomingData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex2((prev) => (prev === maxIndex ? 0 : prev + 1));
@@ -221,7 +223,7 @@ function Home() {
     };
     const decreaseIndex = () => {
         if (data) {
-            if (leaving) return;
+            // if (leaving) return;
             toggleLeaving();
             const totalMovies = data.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
@@ -230,8 +232,8 @@ function Home() {
     };
     const decreaseIndex1 = () => {
         if (topData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving1) return;
+            toggleLeaving1();
             const totalMovies = topData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex1((prev) => (prev === maxIndex ? 0 : prev - 1));
@@ -239,14 +241,16 @@ function Home() {
     };
     const decreaseIndex2 = () => {
         if (upcomingData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving2) return;
+            toggleLeaving2();
             const totalMovies = upcomingData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex2((prev) => (prev === maxIndex ? 0 : prev - 1));
         }
     };
     const toggleLeaving = () => setLeaving((prev) => !prev);
+    const toggleLeaving1 = () => setLeaving1((prev) => !prev);
+    const toggleLeaving2 = () => setLeaving2((prev) => !prev);
     const onBoxClicked = (movieId?: number) => {
         history.push(`/react-masterclass3/movies/${movieId}`);
     };
@@ -270,14 +274,19 @@ function Home() {
                     </Banner>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
-                            <img style={{ width: "40px", height: "40px" }} src="https://img.icons8.com/arcade/344/experimental-star-arcade.png" alt="adult_true" onClick={increaseIndex} />
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
                         </div>
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
-                                src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
-                                onClick={decreaseIndex}
+                                onClick={increaseIndex}
                             />
                         </div>
                     </div>
@@ -312,14 +321,19 @@ function Home() {
                     <Clear></Clear>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
-                            <img style={{ width: "40px", height: "40px" }} src="https://img.icons8.com/arcade/344/experimental-star-arcade.png" alt="adult_true" onClick={increaseIndex1} />
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex1}
+                            />
                         </div>
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
-                                src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
-                                onClick={decreaseIndex1}
+                                onClick={increaseIndex1}
                             />
                         </div>
                     </div>
@@ -352,14 +366,19 @@ function Home() {
                     <Clear></Clear>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
-                            <img style={{ width: "40px", height: "40px" }} src="https://img.icons8.com/arcade/344/experimental-star-arcade.png" alt="adult_true" onClick={increaseIndex2} />
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex2}
+                            />
                         </div>
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
-                                src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
-                                onClick={decreaseIndex2}
+                                onClick={increaseIndex2}
                             />
                         </div>
                     </div>
@@ -431,13 +450,17 @@ function Home() {
                                                 style={{ display: "flex", alignItems: "center", justifyContent: "end", paddingBottom: "30px", marginTop: "-140px", zIndex: 100, position: "relative" }}
                                             >
                                                 <div style={{ display: "flex", alignItems: "center" }}>
-                                                    <img style={{ width: "40px", height: "40px" }} src="https://img.icons8.com/arcade/344/experimental-star-arcade.png" alt="adult_true" />
+                                                    <img
+                                                        style={{ width: "40px", height: "40px" }}
+                                                        src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                                        alt="adult_true"
+                                                    />
                                                     <span style={{ fontSize: "30px" }}>{clickedMovie.vote_count}</span>
                                                 </div>
                                                 <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                                                     <img
                                                         style={{ width: "40px", height: "40px" }}
-                                                        src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
+                                                        src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
                                                         alt="adult_true"
                                                     />
                                                     <span style={{ fontSize: "30px" }}>{clickedMovie.vote_average}</span>
