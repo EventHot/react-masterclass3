@@ -196,7 +196,7 @@ function Home() {
     const [leaving2, setLeaving2] = useState(false);
     const increaseIndex = () => {
         if (data) {
-            if (leaving) return;
+            // if (leaving) return;
             toggleLeaving();
             const totalMovies = data.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
@@ -272,15 +272,15 @@ function Home() {
                         <Title>{data?.results[0].title}</Title>
                         <Overview>{data?.results[0].overview}</Overview>
                     </Banner>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
                                 src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
                                 onClick={decreaseIndex}
                             />
-                        </div>
+                        </div> */}
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
@@ -300,7 +300,7 @@ function Home() {
                                     .slice(offset * index, offset * index + offset)
                                     .map((movie) => (
                                         <Box
-                                            layoutId={movie.id + ""}
+                                            layoutId={movie.id + "111"}
                                             key={movie.id}
                                             whileHover="hover"
                                             initial="normal"
@@ -319,15 +319,15 @@ function Home() {
                     </Slider>
 
                     <Clear></Clear>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
                                 src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
                                 onClick={decreaseIndex1}
                             />
-                        </div>
+                        </div> */}
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
@@ -346,7 +346,7 @@ function Home() {
                                     .slice(offset * index1, offset * index1 + offset)
                                     .map((movie) => (
                                         <Box
-                                            layoutId={movie.id + ""}
+                                            layoutId={movie.id + "222"}
                                             key={movie.id}
                                             whileHover="hover"
                                             initial="normal"
@@ -364,15 +364,15 @@ function Home() {
                         </AnimatePresence>
                     </Slider>
                     <Clear></Clear>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", top: "60px", zIndex: 100, position: "relative" }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
                                 src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
                                 alt="adult_true"
                                 onClick={decreaseIndex2}
                             />
-                        </div>
+                        </div> */}
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                             <img
                                 style={{ width: "40px", height: "40px" }}
@@ -391,7 +391,7 @@ function Home() {
                                     .slice(offset * index2, offset * index2 + offset)
                                     .map((movie) => (
                                         <Box
-                                            layoutId={movie.id + ""}
+                                            layoutId={movie.id + "333"}
                                             key={movie.id}
                                             whileHover="hover"
                                             initial="normal"
@@ -414,7 +414,7 @@ function Home() {
                             <SliderTitle>Latest Movie</SliderTitle>
                             <Row initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
                                 <Box
-                                    layoutId={lastData?.id + ""}
+                                    layoutId={lastData?.id + "444"}
                                     key={lastData?.id}
                                     whileHover="hover"
                                     initial="normal"

@@ -178,19 +178,85 @@ function Tv() {
     const bigMovieMatch = useRouteMatch<{ movieId: string }>("/react-masterclass3/tv/:movieId");
     const { scrollY } = useViewportScroll();
     const { data, isLoading } = useQuery<ITvResult>(["tv", "onair"], getTvShows);
-    const { data: lastData, isLoading: isLastLoading } = useQuery<ITv>(["tv", "last"], getLastTvShows);
     const { data: topData, isLoading: isTopLoading } = useQuery<ITvResult>(["tv", "airingToday"], getAiringTodayTvShows);
     const { data: popularData, isLoading: isPopularLoading } = useQuery<ITvResult>(["tv", "popular"], getPopularShows);
     const { data: topRateData, isLoading: isToRateLoading } = useQuery<ITvResult>(["tv", "topRate"], getTopRatedTvShows);
+    const { data: lastData, isLoading: isLastLoading } = useQuery<ITv>(["tv", "last"], getLastTvShows);
     const [index, setIndex] = useState(0);
+    const [index1, setIndex1] = useState(0);
+    const [index2, setIndex2] = useState(0);
+    const [index3, setIndex3] = useState(0);
     const [leaving, setLeaving] = useState(false);
     const increaseIndex = () => {
         if (data) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving) return;
+
             const totalMovies = data.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+        }
+    };
+    const increaseIndex1 = () => {
+        if (topData) {
+            // if (leaving1) return;
+
+            const totalMovies = topData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex1((prev) => (prev === maxIndex ? 0 : prev + 1));
+        }
+    };
+    const increaseIndex2 = () => {
+        if (popularData) {
+            // if (leaving2) return;
+
+            const totalMovies = popularData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex2((prev) => (prev === maxIndex ? 0 : prev + 1));
+        }
+    };
+    const increaseIndex3 = () => {
+        if (topRateData) {
+            // if (leaving2) return;
+
+            const totalMovies = topRateData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex3((prev) => (prev === maxIndex ? 0 : prev + 1));
+        }
+    };
+    const decreaseIndex = () => {
+        if (data) {
+            // if (leaving) return;
+            toggleLeaving();
+            const totalMovies = data.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex((prev) => (prev === maxIndex ? 0 : prev - 1));
+        }
+    };
+    const decreaseIndex1 = () => {
+        if (topData) {
+            // if (leaving1) return;
+
+            const totalMovies = topData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex1((prev) => (prev === maxIndex ? 0 : prev - 1));
+        }
+    };
+    const decreaseIndex2 = () => {
+        if (popularData) {
+            // if (leaving2) return;
+
+            const totalMovies = popularData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex2((prev) => (prev === maxIndex ? 0 : prev - 1));
+        }
+    };
+    const decreaseIndex3 = () => {
+        if (topRateData) {
+            // if (leaving2) return;
+
+            const totalMovies = topRateData.results.length - 1;
+            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            setIndex3((prev) => (prev === maxIndex ? 0 : prev - 1));
         }
     };
     const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -207,6 +273,24 @@ function Tv() {
                 <Loader>Loading...</Loader>
             ) : (
                 <>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex}
+                            />
+                        </div>
+                    </div>
                     <Slider>
                         <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
                             <SliderTitle>Now Playing</SliderTitle>
@@ -217,6 +301,141 @@ function Tv() {
                                     .map((movie) => (
                                         <Box
                                             layoutId={movie.id + "1"}
+                                            key={movie.id}
+                                            whileHover="hover"
+                                            initial="normal"
+                                            variants={boxVariants}
+                                            onClick={() => onBoxClicked(movie.id)}
+                                            transition={{ type: "tween" }}
+                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                                        >
+                                            <Info variants={infoVariants}>
+                                                <h4>{movie.name}</h4>
+                                            </Info>
+                                        </Box>
+                                    ))}
+                            </Row>
+                        </AnimatePresence>
+                    </Slider>
+                    <Clear></Clear>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex1}
+                            />
+                        </div>
+                    </div>
+                    <Slider>
+                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+                            <SliderTitle>Top Rated Movies</SliderTitle>
+                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index1}>
+                                {topData?.results
+                                    .slice(1)
+                                    .slice(offset * index1, offset * index1 + offset)
+                                    .map((movie) => (
+                                        <Box
+                                            layoutId={movie.id + "3"}
+                                            key={movie.id}
+                                            whileHover="hover"
+                                            initial="normal"
+                                            variants={boxVariants}
+                                            onClick={() => onBoxClicked(movie.id)}
+                                            transition={{ type: "tween" }}
+                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                                        >
+                                            <Info variants={infoVariants}>
+                                                <h4>{movie.name}</h4>
+                                            </Info>
+                                        </Box>
+                                    ))}
+                            </Row>
+                        </AnimatePresence>
+                    </Slider>
+                    <Clear></Clear>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex2}
+                            />
+                        </div>
+                    </div>
+                    <Slider>
+                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+                            <SliderTitle>Upcoming Movies</SliderTitle>
+                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index2}>
+                                {popularData?.results
+                                    .slice(1)
+                                    .slice(offset * index2, offset * index2 + offset)
+                                    .map((movie) => (
+                                        <Box
+                                            layoutId={movie.id + "4"}
+                                            key={movie.id}
+                                            whileHover="hover"
+                                            initial="normal"
+                                            variants={boxVariants}
+                                            onClick={() => onBoxClicked(movie.id)}
+                                            transition={{ type: "tween" }}
+                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                                        >
+                                            <Info variants={infoVariants}>
+                                                <h4>{movie.name}</h4>
+                                            </Info>
+                                        </Box>
+                                    ))}
+                            </Row>
+                        </AnimatePresence>
+                    </Slider>
+                    <Clear></Clear>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex3}
+                            />
+                        </div>
+                    </div>
+                    <Slider>
+                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+                            <SliderTitle>Top Rated Movies</SliderTitle>
+                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index3}>
+                                {topRateData?.results
+                                    .slice(1)
+                                    .slice(offset * index3, offset * index3 + offset)
+                                    .map((movie) => (
+                                        <Box
+                                            layoutId={movie.id + "5"}
                                             key={movie.id}
                                             whileHover="hover"
                                             initial="normal"
@@ -252,87 +471,6 @@ function Tv() {
                                         <h4>{lastData?.name}</h4>
                                     </Info>
                                 </Box>
-                            </Row>
-                        </AnimatePresence>
-                    </Slider>
-                    <Clear></Clear>
-                    <Slider>
-                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-                            <SliderTitle>Top Rated Movies</SliderTitle>
-                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
-                                {topData?.results
-                                    .slice(1)
-                                    .slice(offset * index, offset * index + offset)
-                                    .map((movie) => (
-                                        <Box
-                                            layoutId={movie.id + "3"}
-                                            key={movie.id}
-                                            whileHover="hover"
-                                            initial="normal"
-                                            variants={boxVariants}
-                                            onClick={() => onBoxClicked(movie.id)}
-                                            transition={{ type: "tween" }}
-                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                                        >
-                                            <Info variants={infoVariants}>
-                                                <h4>{movie.name}</h4>
-                                            </Info>
-                                        </Box>
-                                    ))}
-                            </Row>
-                        </AnimatePresence>
-                    </Slider>
-                    <Clear></Clear>
-                    <Slider>
-                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-                            <SliderTitle>Upcoming Movies</SliderTitle>
-                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
-                                {popularData?.results
-                                    .slice(1)
-                                    .slice(offset * index, offset * index + offset)
-                                    .map((movie) => (
-                                        <Box
-                                            layoutId={movie.id + "4"}
-                                            key={movie.id}
-                                            whileHover="hover"
-                                            initial="normal"
-                                            variants={boxVariants}
-                                            onClick={() => onBoxClicked(movie.id)}
-                                            transition={{ type: "tween" }}
-                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                                        >
-                                            <Info variants={infoVariants}>
-                                                <h4>{movie.name}</h4>
-                                            </Info>
-                                        </Box>
-                                    ))}
-                            </Row>
-                        </AnimatePresence>
-                    </Slider>
-                    <Clear></Clear>
-                    <Slider>
-                        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-                            <SliderTitle>Top Rated Movies</SliderTitle>
-                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
-                                {topRateData?.results
-                                    .slice(1)
-                                    .slice(offset * index, offset * index + offset)
-                                    .map((movie) => (
-                                        <Box
-                                            layoutId={movie.id + "5"}
-                                            key={movie.id}
-                                            whileHover="hover"
-                                            initial="normal"
-                                            variants={boxVariants}
-                                            onClick={() => onBoxClicked(movie.id)}
-                                            transition={{ type: "tween" }}
-                                            bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                                        >
-                                            <Info variants={infoVariants}>
-                                                <h4>{movie.name}</h4>
-                                            </Info>
-                                        </Box>
-                                    ))}
                             </Row>
                         </AnimatePresence>
                     </Slider>
