@@ -194,22 +194,25 @@ function Search() {
     const { data: searchMovieData, isLoading: isSearchMovieLoading } = useQuery<IGetMoviesResult>(["movie", keyword], () => searchMovies(keyword?.params.keyword));
     const { data: searchTvShowsData, isLoading: isSearchTvLoading } = useQuery<ITvResult>(["tv", keyword], () => searchTvShows(keyword?.params.keyword));
     const [index, setIndex] = useState(0);
+    const [index1, setIndex1] = useState(0);
     const [leaving, setLeaving] = useState(false);
+
     const increaseIndex = () => {
         if (searchMovieData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving) return;
+
             const totalMovies = searchMovieData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
             setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
         }
-
+    };
+    const increaseIndex1 = () => {
         if (searchTvShowsData) {
-            if (leaving) return;
-            toggleLeaving();
+            // if (leaving1) return;
+
             const totalMovies = searchTvShowsData.results.length - 1;
             const maxIndex = Math.floor(totalMovies / offset) - 1;
-            setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+            setIndex1((prev) => (prev === maxIndex ? 0 : prev + 1));
         }
     };
     const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -229,6 +232,24 @@ function Search() {
                 <Loader>Loading...</Loader>
             ) : (
                 <>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex}
+                            />
+                        </div>
+                    </div>
                     <Slider>
                         <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
                             <SliderTitle>Search Result Movies</SliderTitle>
@@ -256,14 +277,32 @@ function Search() {
                             </Row>
                         </AnimatePresence>
                     </Slider>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "end", top: "60px", zIndex: 100, position: "relative" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={decreaseIndex}
+                            />
+                        </div> */}
+                        <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                            <img
+                                style={{ width: "40px", height: "40px" }}
+                                src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                alt="adult_true"
+                                onClick={increaseIndex1}
+                            />
+                        </div>
+                    </div>
                     <Slider>
                         <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
                             <SliderTitle>Search Result TvShows</SliderTitle>
-                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
+                            <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index1}>
                                 {searchTvShowsData?.results &&
                                     searchTvShowsData?.results
                                         .slice(1)
-                                        .slice(offset * index, offset * index + offset)
+                                        .slice(offset * index1, offset * index1 + offset)
                                         .map((movie) => (
                                             <Box
                                                 layoutId={movie.id + "9"}
