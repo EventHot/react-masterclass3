@@ -452,7 +452,7 @@ function Home() {
                                                 <div style={{ display: "flex", alignItems: "center" }}>
                                                     <img
                                                         style={{ width: "40px", height: "40px" }}
-                                                        src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-left-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                                        src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/2x/external-like-gamification-flaticons-lineal-color-flat-icons.png"
                                                         alt="adult_true"
                                                     />
                                                     <span style={{ fontSize: "30px" }}>{clickedMovie.vote_count}</span>
@@ -460,7 +460,7 @@ function Home() {
                                                 <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
                                                     <img
                                                         style={{ width: "40px", height: "40px" }}
-                                                        src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-right-arrow-essential-phatplus-lineal-color-phatplus.png"
+                                                        src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
                                                         alt="adult_true"
                                                     />
                                                     <span style={{ fontSize: "30px" }}>{clickedMovie.vote_average}</span>

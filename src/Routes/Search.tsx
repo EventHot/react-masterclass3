@@ -128,21 +128,26 @@ const BigCover = styled.div`
     height: 400px;
 `;
 
+const AdultMark = styled.span`
+    position: absolute;
+    right: 0;
+    top: 0;
+`;
+
 const BigTitle = styled.h3`
     color: ${(props) => props.theme.white.lighter};
     padding: 20px;
-    font-size: 46px;
+    font-size: 30px;
     position: relative;
     top: -80px;
+    width: 600px;
 `;
 
 const BigOverview = styled.p`
     padding: 20px;
     position: relative;
-    top: -80px;
     color: ${(props) => props.theme.white.lighter};
 `;
-
 const rowVariants = {
     hidden: {
         x: window.outerWidth + 5,
@@ -338,6 +343,33 @@ function Search() {
                                                 }}
                                             />
                                             <BigTitle>{clickedMovie.title || clickedMovie.name} </BigTitle>
+                                            <div
+                                                style={{ display: "flex", alignItems: "center", justifyContent: "end", paddingBottom: "30px", marginTop: "-140px", zIndex: 100, position: "relative" }}
+                                            >
+                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                    <img
+                                                        style={{ width: "40px", height: "40px" }}
+                                                        src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/2x/external-like-gamification-flaticons-lineal-color-flat-icons.png"
+                                                        alt="adult_true"
+                                                    />
+                                                    <span style={{ fontSize: "30px" }}>{clickedMovie.vote_count}</span>
+                                                </div>
+                                                <div style={{ display: "flex", alignItems: "center", marginLeft: "20px", marginRight: "20px" }}>
+                                                    <img
+                                                        style={{ width: "40px", height: "40px" }}
+                                                        src="https://img.icons8.com/external-prettycons-flat-prettycons/2x/external-percentage-shopping-prettycons-flat-prettycons.png"
+                                                        alt="adult_true"
+                                                    />
+                                                    <span style={{ fontSize: "30px" }}>{clickedMovie.vote_average}</span>
+                                                </div>
+                                            </div>
+                                            <AdultMark>
+                                                {!clickedMovie.adult ? (
+                                                    <img style={{ width: "80px", height: "80px" }} src="https://img.icons8.com/stickers/344/18-plus.png" alt="adult_true" />
+                                                ) : (
+                                                    <img style={{ width: "80px", height: "80px" }} src="https://img.icons8.com/color/344/child-safe-zone--v1.png" alt="adult_false" />
+                                                )}
+                                            </AdultMark>
                                             <BigOverview>{clickedMovie.overview}</BigOverview>
                                         </>
                                     )}

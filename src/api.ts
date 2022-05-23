@@ -21,6 +21,10 @@ export interface ITv {
     title: string;
     name: string;
     overview: string;
+    vote_count: number;
+    vote_average: number;
+    popularity: number;
+    adult: boolean;
 }
 
 export interface IGetMoviesResult {
